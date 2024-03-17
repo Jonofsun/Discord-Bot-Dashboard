@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
-
+// take a serverid and return all of the text channels in that server: select one of those channels and send a mesage through the web app. Hard code the channel ID. create 2 test servers, hard code both, make 2 buttons for server1 and server2 submit the message and return to the dashbaord
 export default function BotPage() {
   // hook to manage the state of the channelId and message inputs.
   const [channelId, setChannelId] = useState("");
@@ -14,19 +14,16 @@ export default function BotPage() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(
-        "https://discord.com/channels/1218014373327540364/1218014373327540367/send-message",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            channelId: channelId,
-            message: message,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:3000/send-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          channelId: channelId,
+          message: message,
+        }),
+      });
 
       const data = await response.json();
       if (data.success) {

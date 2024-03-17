@@ -5,6 +5,7 @@ export default function BotPage() {
   // hook to manage the state of the channelId and message inputs.
   const [channelId, setChannelId] = useState("");
   const [message, setMessage] = useState("");
+  // loop through channels, find the text channels that are type 0, get id and name: that id need to be passed into the get function
 
   // const handleSubmit = () => {
   //   // sending POST request

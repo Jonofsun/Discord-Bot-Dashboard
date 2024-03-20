@@ -10,13 +10,13 @@ import ChangeNicknameScreen from "./screens/ChangeNicknameScreen";
 import RoleChangeComponent from "./components/RoleChangeComponent";
 import RoleChangeScreen from "./screens/RoleChangeScreen";
 
-const Stack = createNativeStackNavigator();
-
+const Stack = createNativeStackNavigator(); // Imported from @react-navigation/native-stack, used to create a stack navigator.
+// Creates a new stack navigator object.
 export default function App() {
   return (
     <>
       <NavigationContainer>
-        {/*Navigation container */}
+        {/*Navigation container manages the navigation tree and contains the navigation state*/}
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
@@ -27,6 +27,8 @@ export default function App() {
             },
           }}
         >
+          {" "}
+          {/* Defines the stack navigation. It contains multiple Stack.Screen components, each representing a screen in the app.*/}
           {/*Navigator wrapper */}
           {/* <Stack.Screen
             options={{

@@ -14,7 +14,9 @@ export default function BotPage() {
   // };
 
   const handleSubmit = async () => {
+    // Function to handle the submission of the form
     try {
+      // Send a HTTP POST request to the server with channelId and message
       const response = await fetch("http://localhost:3000/send-message", {
         method: "POST",
         headers: {
@@ -25,7 +27,7 @@ export default function BotPage() {
           message: message,
         }),
       });
-
+      // Parse the response data
       const data = await response.json();
       if (data.success) {
         console.log("Message sent successfully");
@@ -36,6 +38,7 @@ export default function BotPage() {
         console.error("Failed to send message:", data.error);
       }
     } catch (error) {
+      // Log any errors that occur during the fetch operation
       console.error("Error sending message:", error);
     }
   };

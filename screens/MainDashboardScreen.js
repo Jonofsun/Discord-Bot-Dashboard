@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
+// An array of objects representing the different bot components.
+// Each object has an id, name, and a route which corresponds to a screen in the navigation.
 
 const botComponents = [
   { id: "1", name: "Bot Page", route: "BotPage" },
@@ -11,8 +13,13 @@ const botComponents = [
 ];
 
 export default function MainDashboardScreen() {
-  const navigation = useNavigation();
-  const renderItem = ({ item }) => (
+  const navigation = useNavigation(); // Hook to access the navigation object provided by the navigation container.
+
+  const renderItem = (
+    { item } // Function to render each item in the botComponents array.
+  ) => (
+    // It returns a Pressable component that navigates to the corresponding route when pressed.
+
     <View style={styles.gridItem}>
       <Pressable
         style={({ pressed }) => [
@@ -27,13 +34,13 @@ export default function MainDashboardScreen() {
       </Pressable>
     </View>
   );
-
+  // The component's render function.
   return (
     <View>
       <FlatList
-        data={botComponents}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        data={botComponents} // The data source for the list.
+        renderItem={renderItem} // The function to render each item.
+        keyExtractor={(item) => item.id} // Function to extract a unique key for each item.
         numColumns={2}
       />
       <Footer></Footer>

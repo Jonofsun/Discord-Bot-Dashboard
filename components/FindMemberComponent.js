@@ -5,7 +5,7 @@ import { React, useState } from "react";
 export default function FindMemberComponent() {
   const [guildId, setGuildId] = useState("");
   const [memberNameOrID, setMemberNameOrID] = useState("");
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState("");
 
   const handleFindMember = async () => {
     try {
@@ -15,7 +15,7 @@ export default function FindMemberComponent() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          guildID: guildId, // 1218014373327540367
+          guildID: guildId, // 1218014373327540364
           memberNameOrID: memberNameOrID, // 89915004903522304
         }),
       });
@@ -27,23 +27,25 @@ export default function FindMemberComponent() {
       if (data.success) {
         console.log("Message sent successfully");
         // Optionally, clear the form fields
-        setChannelId("");
-        setMessage("");
+        setResult(`Found member: ${data.member}`);
       } else {
-        console.error("Failed to send message:", data.error);
+        setResult("Member not found.");
       }
     } catch (error) {
       console.error("Error sending message:", error);
+      setResult("Error finding member.");
     }
   };
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
+        style={styles.input}
         placeholder="Guild ID"
         value={guildId}
         onChangeText={setGuildId}
       />
       <TextInput
+        style={styles.input}
         placeholder="Member Name or ID"
         value={memberNameOrID}
         onChangeText={setMemberNameOrID}
@@ -54,4 +56,18 @@ export default function FindMemberComponent() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    padding: 10,
+    marginBottom: 10,
+  },
+});

@@ -21,7 +21,7 @@ export default function BotPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          channelId: channelId,
+          channelId: channelId, // 1218014373327540367
           message: message,
         }),
       });

@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View, Button, Alert, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 
-export default function ChangeNicknameComponent() {
+export default function RoleChangeComponent() {
   const [guildId, setGuildId] = useState("");
   const [memberId, setMemberId] = useState("");
-  const [newNickname, setNewNickname] = useState("");
+  const [roleId, setRoleId] = useState("");
   const [result, setResult] = useState("");
 
-  const handleChangeNickname = async () => {
+  const handleRoleChange = async () => {
     try {
-      const response = await fetch("http://localhost:3000/change-nickname", {
+      const response = await fetch("http://localhost:3000/change-role", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -17,19 +17,19 @@ export default function ChangeNicknameComponent() {
         body: JSON.stringify({
           guildId, // 1218014373327540364
           memberId, // 304658459742306314
-          newNickname,
+          roleId, // 1220135006131720282, 1220135322172784742, 1219131122437460088
         }),
       });
 
       const data = await response.json();
       if (data.success) {
-        setResult(`Nickname changed successfully to ${newNickname}`);
+        setResult("Role changed successfully.");
       } else {
-        setResult("Failed to change nickname");
+        setResult("Failed to change role.");
       }
     } catch (error) {
-      Alert.alert("Error", "Failed to change nickname");
-      console.error(error);
+      console.error("Error changing role:", error);
+      setResult("Error changing role.");
     }
   };
 
@@ -49,11 +49,11 @@ export default function ChangeNicknameComponent() {
       />
       <TextInput
         style={styles.input}
-        placeholder="New Nickname"
-        value={newNickname}
-        onChangeText={setNewNickname}
+        placeholder="Role ID"
+        value={roleId}
+        onChangeText={setRoleId}
       />
-      <Button title="Change Nickname" onPress={handleChangeNickname} />
+      <Button title="Change Role" onPress={handleRoleChange} />
       {result && <Text>{result}</Text>}
     </View>
   );
@@ -61,16 +61,13 @@ export default function ChangeNicknameComponent() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     padding: 20,
   },
   input: {
-    width: "100%",
+    height: 40,
+    marginBottom: 10,
     borderWidth: 1,
     borderColor: "#ddd",
     padding: 10,
-    marginBottom: 10,
   },
 });

@@ -27,7 +27,6 @@ export default function App() {
             },
           }}
         >
-          {" "}
           {/* Defines the stack navigation. It contains multiple Stack.Screen components, each representing a screen in the app.*/}
           {/*Navigator wrapper */}
           {/* <Stack.Screen
